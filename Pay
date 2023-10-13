@@ -1,0 +1,33 @@
+<script src='//zitopay.africa/assets/js/payment.js?v=0007'></script>
+<script>
+function payWithZitopay(){
+	var paymentSettings={
+		amount: '1000',
+		currency: 'XAF',
+		receiver: 'tahmechizedeck',
+		currency: 'XAF',
+		onDone: function(response){
+			window.console&&console.log('Custom Transaction Reference:'+response.ref);
+			window.console&&console.log('Unverified Transaction Status:'+response.status);
+			window.console&&console.log('Payment Method:'+response.payment_method);
+
+			window.console&&console.log('Payment Method Label:'+response.payment_method_label);
+
+			//redirect to your page for server-side confirmation on docs,
+			//as described on https://zitopay.africa/docs#get-transaction
+
+			//window.location.href='http://mywebsite.com/my_confirmation_page?ref='+response.ref;
+		},
+		onClose: function(msg){
+			window.console&&console.log('Payment widget closed. '+msg);
+			////window.location.href='http://mywebsite.com/transaction_cancelation_page?ref='+response.ref;
+		}
+	}
+
+	var zitopayHandler = Zitopay.pay(paymentSettings);
+}
+</script>
+<button 
+style='border:1px solid transparent;font-weight:400;display:inline-block;text-align:right;text-decoration:none;
+color:#fff;background-color:#337ab7;border-color:#2e6da4;
+padding:10px 16px;font-size:18px;line-height:1.33;border-radius
